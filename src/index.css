@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: monospace;
+}
+
+#root {
+  width: 900px;
+  margin: 20px auto;
+}
+
+.header-social {
+  background-color: #8080803b;
+  display: flex;
+  height: 50px;
+  align-items: center;
+}
+.header-title {
+  margin: 0 20px;
+  font-size: x-large;
+  font-weight: 100;
+}
+.form, .auth {
+  margin: 0 20px 0 auto;
+}
+
+input {
+  margin-right: 10px;
+  height: 30px;
+  padding-left: 4px;
+  border-radius: 3px;
+  border: 1px solid #00000059;
+}
+
+button {
+  width: 60px;
+  height: 30px;
+  font-size: large;
+  border-radius: 3px;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.form-btn {
+  color: #2bc22b;
+  border: 1px solid #2bc22b;
+}
+
+.btn-out {
+  color: #f44336;
+  border: 1px solid #f44336;
+}
+
+.auth {
+  display: flex;
+}
+
+.auth > img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+
+.auth > h5 {
+  align-self: center;
+  font-size: large;
+  font-weight: 300;
+}
+
+.plug {
+  margin: 20px auto;
+  width: 700px;
+  height: 350px;
+  text-align: center;
+  padding-top: 155px;
+  background-color: #8080803b;
+  font-size: xxx-large;
+}
+
+.news-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 80%;
+  margin: 10px auto;
+}
+
+.news {
+  border-radius: 3px;
+  border: 1px solid #00000059;
+  width: 48%;
+  margin-bottom: 10px;
+}
+
+.news > img {
+  width: 100%;
+}
+
+.news-text {
+  font-size: large;
+}
+
+.news-text > h5 {
+  text-transform: capitalize;
+}
+
+.news-text > h5, .news-text > p {
+  padding: 5px;
+}
