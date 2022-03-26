@@ -14,7 +14,9 @@ export default function useFetchAuthorization(input, output, saveToken) {
   }, [output])
 
   useEffect(() => {
+    console.log(input);
     if (input !== null) {
+      console.log(process.env.REACT_APP_AUTH);
       fetch(process.env.REACT_APP_AUTH, {
         method: 'POST',
         body: JSON.stringify({

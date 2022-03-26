@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import NetoForm from "./components/NetoForm";
 import NetoHeader from "./components/NetoHeader";
 import NetoList from "./components/NetoList";
@@ -38,22 +39,49 @@ export default function App() {
     setInput(null)
     setTimeout(() => setOutput(false), 2*1000)
   }
-
+  console.log(user, news);
   return (
-    <>
-      <NetoHeader>
-        {user === null ?
-          <NetoForm
-            login={login}
-            password={password}
-            handleInputLogin={handleInputLogin}
-            handleInputPassword={handleInputPassword}
-            handleClickIn={handleClickIn} /> :
-          <NetoLogout
-            user={user}
-            handleClickOut={handleClickOut}/>}
-      </NetoHeader>
-      {news.length === 0 ? <NetoPlug/> : <NetoList news={news}/>}
-    </>
+    <Routes>
+      <Route path="/" element={
+        <>
+          <NetoHeader>
+            <NetoForm
+              login={login}
+              password={password}
+              handleInputLogin={handleInputLogin}
+              handleInputPassword={handleInputPassword}
+              handleClickIn={handleClickIn} />
+          </NetoHeader>
+          <NetoPlug/>
+        </>
+      }/>
+      <Route path="/news" element={
+          <>
+            <NetoHeader>
+              <NetoLogout
+                user={user}
+                handleClickOut={handleClickOut}/>
+            </NetoHeader>
+            <NetoList news={news}/>
+          </>
+        }/>
+    </Routes>
+
+
+    // <>
+    //   <NetoHeader>
+    //     {user === null ?
+    //       <NetoForm
+    //         login={login}
+    //         password={password}
+    //         handleInputLogin={handleInputLogin}
+    //         handleInputPassword={handleInputPassword}
+    //         handleClickIn={handleClickIn} /> :
+    //       <NetoLogout
+    //         user={user}
+    //         handleClickOut={handleClickOut}/>}
+    //   </NetoHeader>
+    //   {news.length === 0 ? <NetoPlug/> : <NetoList news={news}/>}
+    // </>
   );
 }

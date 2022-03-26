@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function NetoForm({login, password, handleInputLogin, handleInputPassword, handleClickIn}) {
   return (
@@ -17,10 +18,10 @@ export default function NetoForm({login, password, handleInputLogin, handleInput
         required
         value={password}
         onChange={handleInputPassword}/>
-      <button
-        type="button"
+      <Link
+        to={'/news'}
         className="form-btn"
-        onClick={handleClickIn}>Login</button>
+        onClick={handleClickIn}>Login</Link>
     </form>
   )
 }

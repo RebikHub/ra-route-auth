@@ -6,7 +6,7 @@ const koaBody = require('koa-body');
 const passport = require('koa-passport');
 const { Strategy } = require('passport-http-bearer');
 const uuid = require('uuid');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const faker = require('faker');
 
 const app = new Koa();
@@ -58,7 +58,7 @@ const bearerAuth = passport.authenticate('bearer', { session: false });
 
 const router = new Router();
 router.post('/auth', async (ctx, next) => {
-    const { login, password } = ctx.request.body;
+    const { login, password } = JSON.parse(ctx.request.body);
 
     const user = users.get(login);
     if (user === undefined) {

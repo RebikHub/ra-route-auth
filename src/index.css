@@ -5,7 +5,7 @@
 }
 
 #root {
-  width: 900px;
+  max-width: 900px;
   margin: 20px auto;
 }
 
@@ -32,9 +32,12 @@ input {
   border: 1px solid #00000059;
 }
 
-button {
+a {
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
   width: 60px;
-  height: 30px;
+  line-height: 27px;
   font-size: large;
   border-radius: 3px;
   font-weight: bolder;
