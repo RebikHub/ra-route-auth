@@ -32,7 +32,7 @@ input {
   border: 1px solid #00000059;
 }
 
-a {
+.form > a, .auth > a {
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -94,6 +94,8 @@ a {
   border: 1px solid #00000059;
   width: 48%;
   margin-bottom: 10px;
+  text-decoration: none;
+  color: black;
 }
 
 .news > img {
@@ -110,4 +112,11 @@ a {
 
 .news-text > h5, .news-text > p {
   padding: 5px;
+}
+
+.error {
+  max-width: 300px;
+  margin: 20px auto;
+  text-transform: uppercase;
+  font-size: xx-large;
 }

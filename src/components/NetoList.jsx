@@ -1,14 +1,13 @@
 import React from 'react'
 import NetoNews from './NetoNews'
 
-export default function NetoList({news}) {
+export default function NetoList({news, checkId}) {
   return (
     <div className="news-list">
       {news.map((el) =>
         <NetoNews
-          title={el.title}
-          image={el.image}
-          content={el.content}
+          news={el}
+          checkId={checkId}
           key={el.id}/>
         )}
     </div>

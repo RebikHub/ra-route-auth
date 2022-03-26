@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import NetoForm from "./components/NetoForm";
 import NetoHeader from "./components/NetoHeader";
 import NetoList from "./components/NetoList";
 import NetoLogout from "./components/NetoLogout";
 import NetoPlug from "./components/NetoPlug";
+import NetoError from "./components/NetoError";
+import NetoNews from "./components/NetoNews";
 import useFetchAuthorization from "./custom_hook/useFetchAuthorization";
 
 export default function App() {
@@ -12,8 +14,9 @@ export default function App() {
   const [password, setPassword] = useState('')
   const [input, setInput] = useState(null)
   const [output, setOutput] = useState(false)
+  const [newsid, setNewsid] = useState(null)
   const token = JSON.parse(localStorage.getItem('token'))
-  const [user, news] = useFetchAuthorization(input, output, token)
+  const [user, news, error, newsOne] = useFetchAuthorization(input, output, token, newsid)
 
   function handleInputLogin(ev) {
     setLogin(ev.target.value)
@@ -39,7 +42,11 @@ export default function App() {
     setInput(null)
     setTimeout(() => setOutput(false), 2*1000)
   }
-  console.log(user, news);
+  function checkId(id) {
+    setNewsid(id)
+    console.log(id);
+  }
+
   return (
     <Routes>
       <Route path="/" element={
@@ -55,33 +62,28 @@ export default function App() {
           <NetoPlug/>
         </>
       }/>
-      <Route path="/news" element={
+      <Route path="/news" element={(user !== null && error === null) ? (
           <>
             <NetoHeader>
               <NetoLogout
                 user={user}
                 handleClickOut={handleClickOut}/>
             </NetoHeader>
-            <NetoList news={news}/>
+            <NetoList news={news} checkId={checkId}/>
           </>
+          ) : (error === null ? <progress/> : <NetoError error={error}/>)
         }/>
+      <Route path="/news/:newsId" element={(newsOne !== null && error === null) ? (
+          <>
+            <NetoHeader>
+              <NetoLogout
+                user={user}
+                handleClickOut={handleClickOut}/>
+            </NetoHeader>
+            <NetoNews news={newsOne}/>
+          </>
+          ) : (error === null ? <progress/> : <NetoError error={error}/>)
+      }/>
     </Routes>
-
-
-    // <>
-    //   <NetoHeader>
-    //     {user === null ?
-    //       <NetoForm
-    //         login={login}
-    //         password={password}
-    //         handleInputLogin={handleInputLogin}
-    //         handleInputPassword={handleInputPassword}
-    //         handleClickIn={handleClickIn} /> :
-    //       <NetoLogout
-    //         user={user}
-    //         handleClickOut={handleClickOut}/>}
-    //   </NetoHeader>
-    //   {news.length === 0 ? <NetoPlug/> : <NetoList news={news}/>}
-    // </>
   );
 }
