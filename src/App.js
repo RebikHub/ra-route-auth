@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import NetoForm from "./components/NetoForm";
 import NetoHeader from "./components/NetoHeader";
@@ -71,9 +71,9 @@ export default function App() {
             </NetoHeader>
             <NetoList news={news} checkId={checkId}/>
           </>
-          ) : (error === null ? <progress/> : <NetoError error={error}/>)
+          ) : <NetoError error={error}/>
         }/>
-      <Route path="/news/:newsId" element={(newsOne !== null && error === null) ? (
+      <Route path="/news/:newsId" element={(user !== null && error === null) ? (
           <>
             <NetoHeader>
               <NetoLogout
@@ -82,7 +82,7 @@ export default function App() {
             </NetoHeader>
             <NetoNews news={newsOne}/>
           </>
-          ) : (error === null ? <progress/> : <NetoError error={error}/>)
+          ) : <NetoError error={error}/>
       }/>
     </Routes>
   );

@@ -5,7 +5,7 @@ export default function NetoForm({login, password, handleInputLogin, handleInput
   return (
     <form className="form">
       <input 
-        type="login"
+        type="text"
         className="input-name"
         placeholder="Username"
         required

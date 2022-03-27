@@ -90,10 +90,12 @@ input {
 }
 
 .news {
+  display: flex;
+  flex-direction: column;
   border-radius: 3px;
   border: 1px solid #00000059;
   width: 48%;
-  margin-bottom: 10px;
+  margin: 10px auto;
   text-decoration: none;
   color: black;
 }
