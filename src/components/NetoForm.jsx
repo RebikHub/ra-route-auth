@@ -28,8 +28,8 @@ export default function NetoForm({
         onChange={handleInputPassword}/>
       <button
         className="form-btn"
-        onClick={async () => {
-          await handleClickIn()
+        onClick={() => {
+          handleClickIn()
           if (done) {
             navigate("/ra-route-auth/news")
           }

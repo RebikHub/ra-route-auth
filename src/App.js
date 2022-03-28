@@ -27,7 +27,7 @@ export default function App() {
     setPassword(ev.target.value)
   }
 
-  async function handleClickIn() {
+  function handleClickIn() {
     if (login !== '' && password !== '') {
       setInput({
         login: login, 
@@ -36,7 +36,6 @@ export default function App() {
       setLogin('')
       setPassword('')
     }
-    return await token
   }
 
   useEffect(() => {
