@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import NetoForm from "./components/NetoForm";
 import NetoHeader from "./components/NetoHeader";
@@ -17,7 +17,8 @@ export default function App() {
   const [newsid, setNewsid] = useState(null)
   const token = JSON.parse(localStorage.getItem('token'))
   const [user, news, error, newsOne] = useFetchAuthorization(input, output, token, newsid)
-
+  const [done, setDone] = useState(false)
+  
   function handleInputLogin(ev) {
     setLogin(ev.target.value)
   }
@@ -26,7 +27,7 @@ export default function App() {
     setPassword(ev.target.value)
   }
 
-  function handleClickIn() {
+  async function handleClickIn() {
     if (login !== '' && password !== '') {
       setInput({
         login: login, 
@@ -35,7 +36,16 @@ export default function App() {
       setLogin('')
       setPassword('')
     }
+    return await token
   }
+
+  useEffect(() => {
+    if (error === 'Not Found First Value') {
+      setDone(false)
+    } else if (error === 'user not found' || error === '401 Unauthorized') {
+      setDone(true)
+    }
+  }, [error, done, input])
 
   function handleClickOut() {
     setOutput(true)
@@ -44,9 +54,24 @@ export default function App() {
   }
   function checkId(id) {
     setNewsid(id)
-    console.log(id);
   }
 
+  if (done) {
+    return (
+      <>
+        <NetoHeader>
+          <NetoForm
+            login={login}
+            password={password}
+            handleInputLogin={handleInputLogin}
+            handleInputPassword={handleInputPassword}
+            handleClickIn={handleClickIn}
+            done={done}/>
+        </NetoHeader>
+        <NetoError error={error}/>
+      </>
+    )
+  }
   return (
     <Routes>
       <Route path="/" element={
@@ -57,12 +82,13 @@ export default function App() {
               password={password}
               handleInputLogin={handleInputLogin}
               handleInputPassword={handleInputPassword}
-              handleClickIn={handleClickIn} />
+              handleClickIn={handleClickIn}
+              done={done}/>
           </NetoHeader>
           <NetoPlug/>
         </>
       }/>
-      <Route path="/news" element={(user !== null && error === null) ? (
+      <Route path="/news" element={user !== null ? (
           <>
             <NetoHeader>
               <NetoLogout
@@ -71,19 +97,20 @@ export default function App() {
             </NetoHeader>
             <NetoList news={news} checkId={checkId}/>
           </>
-          ) : <NetoError error={error}/>
+          ) : <progress/>
         }/>
-      <Route path="/news/:newsId" element={(user !== null && error === null) ? (
+      <Route path="/news/:newsId" element={user !== null ? (
           <>
             <NetoHeader>
               <NetoLogout
                 user={user}
                 handleClickOut={handleClickOut}/>
             </NetoHeader>
-            <NetoNews news={newsOne}/>
+            <NetoNews news={newsOne} checkId={checkId}/>
           </>
-          ) : <NetoError error={error}/>
+          ) : <progress/>
       }/>
+      <Route path="*" element={<NetoError error={error}/>}/>
     </Routes>
   );
 }

@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import NetoError from './NetoError';
 
 export default function NetoNews({news, checkId}) {
   const params = useParams()
-  if (!news) {
+
+  useEffect(() => {
+    checkId(params.newsId)
+  }, [checkId, news, params.newsId])
+
+  if (news === null) {
     return (
       <NetoError error={'404 Not Found'}/>
     )

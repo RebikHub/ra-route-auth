@@ -1,7 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-export default function NetoForm({login, password, handleInputLogin, handleInputPassword, handleClickIn}) {
+export default function NetoForm({
+  login,
+  password,
+  handleInputLogin,
+  handleInputPassword,
+  handleClickIn,
+  done
+}) {
+  let navigate = useNavigate()
   return (
     <form className="form">
       <input 
@@ -18,10 +26,14 @@ export default function NetoForm({login, password, handleInputLogin, handleInput
         required
         value={password}
         onChange={handleInputPassword}/>
-      <Link
-        to={'/news'}
+      <button
         className="form-btn"
-        onClick={handleClickIn}>Login</Link>
+        onClick={async () => {
+          await handleClickIn()
+          if (done) {
+            navigate("/news")
+          }
+          }}>Login</button>
     </form>
   )
 }

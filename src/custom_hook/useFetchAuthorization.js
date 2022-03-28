@@ -4,41 +4,20 @@ export default function useFetchAuthorization(input, output, saveToken, newsId) 
   const [token, setToken] = useState(saveToken)
   const [user, setUser] = useState(null)
   const [news, setNews] = useState([])
-  const [error, setError] = useState(null)
+  const [error, setError] = useState('Not Found First Value')
   const [newsOne, setNewsOne] = useState(null)
 
   useEffect(() => {
     if (output) {
       setUser(null)
       setNews([])
-      setError(null)
+      setError('Not Found First Value')
       localStorage.removeItem('token')
     }
   }, [output])
 
-  async function fetchNews(token, newsId) {
-    try {
-      const response = await fetch(process.env.REACT_APP_NEWS_ID + newsId, {
-        method: 'GET',
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      })
-      setError(null)
-      if(response.status === 404) {
-        setError('404 Not Found')
-        throw new Error('404 Not Foynd')
-      }
-      const json = await response.json()
-      return setNewsOne(json)
-    } catch (err) {
-      setError(err)
-    }
-  }
-
   useEffect(() => {
     if (newsId !== null) {
-      // fetchNews(token.token, newsId)
       fetch(process.env.REACT_APP_NEWS_ID + newsId, {
         method: 'GET',
         headers: {
@@ -47,35 +26,18 @@ export default function useFetchAuthorization(input, output, saveToken, newsId) 
       })
         .then(resp => {
           if(resp.status === 404) {
-            setError('404 Not Found')
-            throw new Error('404 Not Foynd')
+            throw new Error('404 Not Found')
           }
-          setError(null)
+          setError('Not Found First Value')
           return resp.json()
         })
         .then(json => setNewsOne(json))
-        .catch(err => setError(err))
+        .catch(() => setError('404 Not Found'))
     }
   }, [newsId, token]);
 
-  async function fetchAuth(input) {
-    const response = await fetch(process.env.REACT_APP_AUTH, {
-      method: 'POST',
-      body: JSON.stringify({
-        login: input.login, 
-        password: input.password
-      })
-    })
-    const token = await response.json()
-    setToken(token)
-    setError(null)
-    return localStorage.setItem('token', JSON.stringify(token))
-  }
-
-
   useEffect(() => {
     if (input !== null) {
-      // fetchAuth(input)
       fetch(process.env.REACT_APP_AUTH, {
         method: 'POST',
         body: JSON.stringify({
@@ -88,55 +50,21 @@ export default function useFetchAuthorization(input, output, saveToken, newsId) 
             setUser(null)
             setNews([])
             localStorage.removeItem('token')
-            setError('user not found' )
-            throw new Error('user not found' )
+            throw new Error('user not found')
           }
-          setError(null)
           return resp.json()
         })
         .then(token => {
           setToken(token)
-          setError(null)
+          setError('Not Found First Value')
           localStorage.setItem('token', JSON.stringify(token))
       })
-        .catch((err) => console.log(err))
+        .catch(() => setError('user not found'))
     }
   }, [input])
 
-  async function fetchGetData(token) {
-    try {
-      const response = await fetch(process.env.REACT_APP_ME, {
-        method: 'GET',
-        headers: {
-          'Authorization': 'Bearer ' + token.token
-        }
-      })
-      if(response.status === 401) {
-        setUser(null)
-        setNews([])
-        localStorage.removeItem('token')
-        setError('401 Unauthorized')
-        throw new Error('401 Unauthorized')
-      }
-      setError(null)
-      const json = await response.json()
-      setUser(json)
-      const responseNews = await fetch(process.env.REACT_APP_NEWS, {
-        method: 'GET',
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      })
-      const jsonNews = await responseNews.json()
-      return setNews(jsonNews)
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   useEffect(() => {
     if (token !== null) {
-      // fetchGetData(token.token)
       fetch(process.env.REACT_APP_ME, {
         method: 'GET',
         headers: {
@@ -148,14 +76,13 @@ export default function useFetchAuthorization(input, output, saveToken, newsId) 
             setUser(null)
             setNews([])
             localStorage.removeItem('token')
-            setError('401 Unauthorized')
             throw new Error('401 Unauthorized')
           }
-          setError(null)
           return resp.json()
         })
         .then(json => {
           setUser(json)
+          setError('Not Found First Value')
           fetch(process.env.REACT_APP_NEWS, {
             method: 'GET',
             headers: {
@@ -167,7 +94,7 @@ export default function useFetchAuthorization(input, output, saveToken, newsId) 
               setNews(json)
             })
         })
-        .catch((err) => console.log(err))
+        .catch(() => setError('401 Unauthorized'))
     }
   }, [token])
 

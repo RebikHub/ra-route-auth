@@ -32,7 +32,7 @@ input {
   border: 1px solid #00000059;
 }
 
-.form > a, .auth > a {
+.form > button, .auth > a {
   text-align: center;
   text-decoration: none;
   display: inline-block;
