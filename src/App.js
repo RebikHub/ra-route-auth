@@ -18,7 +18,7 @@ export default function App() {
   const token = JSON.parse(localStorage.getItem('token'))
   const [user, news, error, newsOne] = useFetchAuthorization(input, output, token, newsid)
   const [done, setDone] = useState(false)
-  
+
   function handleInputLogin(ev) {
     setLogin(ev.target.value)
   }
@@ -74,7 +74,7 @@ export default function App() {
   }
   return (
     <Routes>
-      <Route path="/" element={
+      <Route path="/ra-route-auth" element={
         <>
           <NetoHeader>
             <NetoForm
@@ -88,7 +88,7 @@ export default function App() {
           <NetoPlug/>
         </>
       }/>
-      <Route path="/news" element={user !== null ? (
+      <Route path="/ra-route-auth/news" element={user !== null ? (
           <>
             <NetoHeader>
               <NetoLogout
@@ -99,7 +99,7 @@ export default function App() {
           </>
           ) : <progress/>
         }/>
-      <Route path="/news/:newsId" element={user !== null ? (
+      <Route path="/ra-route-auth/news/:newsId" element={user !== null ? (
           <>
             <NetoHeader>
               <NetoLogout
@@ -110,7 +110,7 @@ export default function App() {
           </>
           ) : <progress/>
       }/>
-      <Route path="*" element={<NetoError error={error}/>}/>
+      <Route path="/ra-route-auth/*" element={<NetoError error={error}/>}/>
     </Routes>
   );
 }

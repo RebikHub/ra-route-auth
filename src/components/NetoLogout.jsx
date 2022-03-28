@@ -7,7 +7,7 @@ export default function NetoLogout({user, handleClickOut}) {
       <h5>{user.name}</h5>
       <img src={user.avatar} alt={user.name} />
       <Link
-        to={'/'}
+        to={'/ra-route-auth'}
         className="btn-out"
         onClick={handleClickOut}>Logout</Link>
     </div>

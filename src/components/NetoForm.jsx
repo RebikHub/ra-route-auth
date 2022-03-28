@@ -31,7 +31,7 @@ export default function NetoForm({
         onClick={async () => {
           await handleClickIn()
           if (done) {
-            navigate("/news")
+            navigate("/ra-route-auth/news")
           }
           }}>Login</button>
     </form>
