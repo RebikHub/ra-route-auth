@@ -73,7 +73,7 @@ export default function App() {
   }
   return (
     <Routes>
-      <Route path="/ra-route-auth" element={
+      <Route path="/" element={
         <>
           <NetoHeader>
             <NetoForm
@@ -87,7 +87,7 @@ export default function App() {
           <NetoPlug/>
         </>
       }/>
-      <Route path="/ra-route-auth/news" element={user !== null ? (
+      <Route path="/news" element={user !== null ? (
           <>
             <NetoHeader>
               <NetoLogout
@@ -98,7 +98,7 @@ export default function App() {
           </>
           ) : <progress/>
         }/>
-      <Route path="/ra-route-auth/news/:newsId" element={user !== null ? (
+      <Route path="/news/:newsId" element={user !== null ? (
           <>
             <NetoHeader>
               <NetoLogout
