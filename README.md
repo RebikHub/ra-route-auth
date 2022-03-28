@@ -1,3 +1,4 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/fa9nfnfrca8ya8s4/branch/master?svg=true)](https://ci.appveyor.com/project/RebikHub/ra-route-auth/branch/master)
 
 [Authentication](https://rebikhub.github.io/ra-route-auth/)
 
