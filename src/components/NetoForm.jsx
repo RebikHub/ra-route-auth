@@ -6,10 +6,20 @@ export default function NetoForm({
   password,
   handleInputLogin,
   handleInputPassword,
-  handleClickIn,
-  done
+  handleClickIn
 }) {
   let navigate = useNavigate()
+
+  function getToken() {
+    if (login !== "" && password !== "") {
+      setTimeout(() => {
+        const token = JSON.parse(localStorage.getItem('token'))
+        if (token) {
+          navigate("/ra-route-auth/news")
+        }
+      }, 2000)
+    }
+  }
   return (
     <form className="form">
       <input 
@@ -28,11 +38,9 @@ export default function NetoForm({
         onChange={handleInputPassword}/>
       <button
         className="form-btn"
-        onClick={() => {
-          handleClickIn()
-          if (done) {
-            navigate("/news")
-          }
+        onClick={(ev) => {
+          handleClickIn(ev)
+          getToken()
           }}>Login</button>
     </form>
   )

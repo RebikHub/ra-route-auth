@@ -27,12 +27,13 @@ export default function App() {
     setPassword(ev.target.value)
   }
 
-  function handleClickIn() {
+  function handleClickIn(ev) {
     if (login !== '' && password !== '') {
       setInput({
         login: login, 
         password: password
       })
+      ev.preventDefault()
       setLogin('')
       setPassword('')
     }
@@ -51,6 +52,7 @@ export default function App() {
     setInput(null)
     setTimeout(() => setOutput(false), 2*1000)
   }
+
   function checkId(id) {
     setNewsid(id)
   }
@@ -64,8 +66,7 @@ export default function App() {
             password={password}
             handleInputLogin={handleInputLogin}
             handleInputPassword={handleInputPassword}
-            handleClickIn={handleClickIn}
-            done={done}/>
+            handleClickIn={handleClickIn}/>
         </NetoHeader>
         <NetoError error={error}/>
       </>
@@ -73,7 +74,7 @@ export default function App() {
   }
   return (
     <Routes>
-      <Route path="/" element={
+      <Route path="/ra-route-auth" element={
         <>
           <NetoHeader>
             <NetoForm
@@ -81,13 +82,12 @@ export default function App() {
               password={password}
               handleInputLogin={handleInputLogin}
               handleInputPassword={handleInputPassword}
-              handleClickIn={handleClickIn}
-              done={done}/>
+              handleClickIn={handleClickIn}/>
           </NetoHeader>
           <NetoPlug/>
         </>
       }/>
-      <Route path="/news" element={user !== null ? (
+      <Route path="/ra-route-auth/news" element={user !== null ? (
           <>
             <NetoHeader>
               <NetoLogout
@@ -96,9 +96,9 @@ export default function App() {
             </NetoHeader>
             <NetoList news={news} checkId={checkId}/>
           </>
-          ) : <progress/>
+          ) : (token ? <progress/> : <NetoError error={error}/>)
         }/>
-      <Route path="/news/:newsId" element={user !== null ? (
+      <Route path="/ra-route-auth/news/:newsId" element={user !== null ? (
           <>
             <NetoHeader>
               <NetoLogout
@@ -109,7 +109,7 @@ export default function App() {
           </>
           ) : <progress/>
       }/>
-      <Route path="/ra-route-auth/*" element={<NetoError error={error}/>}/>
+      <Route path="*" element={<NetoError error={error}/>}/>
     </Routes>
   );
 }

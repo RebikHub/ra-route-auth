@@ -17,7 +17,7 @@ export default function useFetchAuthorization(input, output, saveToken, newsId) 
   }, [output])
 
   useEffect(() => {
-    if (newsId !== null) {
+    if (newsId) {
       fetch(process.env.REACT_APP_NEWS_ID + newsId, {
         method: 'GET',
         headers: {
