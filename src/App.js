@@ -109,7 +109,7 @@ export default function App() {
           </>
           ) : <progress/>
       }/>
-      <Route path="*" element={<NetoError error={error}/>}/>
+      <Route path="/ra-route-auth/*" element={<NetoError error={error}/>}/>
     </Routes>
   );
 }
