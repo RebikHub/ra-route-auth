@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ra-route-auth/static/css/main.56af0eae.css",
+    "main.js": "/ra-route-auth/static/js/main.4617847c.js",
+    "index.html": "/ra-route-auth/index.html",
+    "main.56af0eae.css.map": "/ra-route-auth/static/css/main.56af0eae.css.map",
+    "main.4617847c.js.map": "/ra-route-auth/static/js/main.4617847c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.56af0eae.css",
+    "static/js/main.4617847c.js"
+  ]
+}
