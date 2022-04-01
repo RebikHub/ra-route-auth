@@ -15,7 +15,7 @@ export default function NetoForm({
       setTimeout(() => {
         const token = JSON.parse(localStorage.getItem('token'));
         if (token) {
-          navigate("/ra-route-auth/news");
+          navigate("/news");
         };
       }, 2000);
     };
