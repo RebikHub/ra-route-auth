@@ -1,5 +1,5 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function NetoForm({
   login,
@@ -8,18 +8,19 @@ export default function NetoForm({
   handleInputPassword,
   handleClickIn
 }) {
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
   function getToken() {
     if (login !== "" && password !== "") {
       setTimeout(() => {
-        const token = JSON.parse(localStorage.getItem('token'))
+        const token = JSON.parse(localStorage.getItem('token'));
         if (token) {
-          navigate("/ra-route-auth/news")
-        }
-      }, 2000)
-    }
-  }
+          navigate("/ra-route-auth/news");
+        };
+      }, 2000);
+    };
+  };
+
   return (
     <form className="form">
       <input 
@@ -43,5 +44,5 @@ export default function NetoForm({
           getToken()
           }}>Login</button>
     </form>
-  )
-}
+  );
+};

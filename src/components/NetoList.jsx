@@ -1,5 +1,5 @@
-import React from 'react'
-import NetoNews from './NetoNews'
+import React from 'react';
+import NetoNews from './NetoNews';
 
 export default function NetoList({news, checkId}) {
   return (
@@ -11,5 +11,5 @@ export default function NetoList({news, checkId}) {
           key={el.id}/>
         )}
     </div>
-  )
-}
+  );
+};

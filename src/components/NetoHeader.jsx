@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export default function NetoHeader(props) {
   return (
@@ -6,5 +6,5 @@ export default function NetoHeader(props) {
       <h4 className="header-title">Neto Social</h4>
       {props.children}
     </div>
-  )
-}
+  );
+};

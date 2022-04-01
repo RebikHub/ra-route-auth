@@ -10,52 +10,52 @@ import NetoNews from "./components/NetoNews";
 import useFetchAuthorization from "./custom_hook/useFetchAuthorization";
 
 export default function App() {
-  const [login, setLogin] = useState('')
-  const [password, setPassword] = useState('')
-  const [input, setInput] = useState(null)
-  const [output, setOutput] = useState(false)
-  const [newsid, setNewsid] = useState(null)
-  const token = JSON.parse(localStorage.getItem('token'))
-  const [user, news, error, newsOne] = useFetchAuthorization(input, output, token, newsid)
-  const [done, setDone] = useState(false)
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [input, setInput] = useState(null);
+  const [output, setOutput] = useState(false);
+  const [newsid, setNewsid] = useState(null);
+  const token = JSON.parse(localStorage.getItem('token'));
+  const [user, news, error, newsOne] = useFetchAuthorization(input, output, token, newsid);
+  const [done, setDone] = useState(false);
 
   function handleInputLogin(ev) {
-    setLogin(ev.target.value)
-  }
+    setLogin(ev.target.value);
+  };
 
   function handleInputPassword(ev) {
-    setPassword(ev.target.value)
-  }
+    setPassword(ev.target.value);
+  };
 
   function handleClickIn(ev) {
     if (login !== '' && password !== '') {
       setInput({
         login: login, 
         password: password
-      })
-      ev.preventDefault()
-      setLogin('')
-      setPassword('')
-    }
-  }
+      });
+      ev.preventDefault();
+      setLogin('');
+      setPassword('');
+    };
+  };
 
   useEffect(() => {
     if (error === 'Not Found First Value') {
-      setDone(false)
+      setDone(false);
     } else if (error === 'user not found' || error === '401 Unauthorized') {
-      setDone(true)
-    }
-  }, [error, done, input])
+      setDone(true);
+    };
+  }, [error, done, input]);
 
   function handleClickOut() {
-    setOutput(true)
-    setInput(null)
-    setTimeout(() => setOutput(false), 2*1000)
-  }
+    setOutput(true);
+    setInput(null);
+    setTimeout(() => setOutput(false), 2*1000);
+  };
 
   function checkId(id) {
-    setNewsid(id)
-  }
+    setNewsid(id);
+  };
 
   if (done) {
     return (
@@ -70,8 +70,9 @@ export default function App() {
         </NetoHeader>
         <NetoError error={error}/>
       </>
-    )
-  }
+    );
+  };
+
   return (
     <Routes>
       <Route path="/ra-route-auth" element={
@@ -112,4 +113,4 @@ export default function App() {
       <Route path="/ra-route-auth/*" element={<NetoError error={error}/>}/>
     </Routes>
   );
-}
+};

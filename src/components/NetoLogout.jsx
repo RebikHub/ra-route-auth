@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function NetoLogout({user, handleClickOut}) {
   return (
@@ -11,5 +11,5 @@ export default function NetoLogout({user, handleClickOut}) {
         className="btn-out"
         onClick={handleClickOut}>Logout</Link>
     </div>
-  )
-}
+  );
+};

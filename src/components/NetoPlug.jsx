@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export default function NetoPlug() {
   return (
@@ -6,5 +6,5 @@ export default function NetoPlug() {
       <h2>Neto Social</h2>
       <p>Facebook and VK killer</p>
     </div>
-  )
-}
+  );
+};
