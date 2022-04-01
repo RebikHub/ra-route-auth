@@ -16,7 +16,7 @@ export default function NetoNews({news, checkId}) {
   };
 
   return (
-    <Link to={`/ra-route-auth/news/${news.id}`} onClick={(ev) => {
+    <Link to={`/news/${news.id}`} onClick={(ev) => {
         if (params.newsId) {
           ev.preventDefault();
         } else {
